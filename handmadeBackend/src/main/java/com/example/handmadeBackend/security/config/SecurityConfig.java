@@ -5,9 +5,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 @Component
-@PropertySource("classpath:security.properties")
 @CrossOrigin
 @Inherited
+@PropertySource("classpath:security.properties")
+@Retention(value= RetentionPolicy.RUNTIME)
 public @interface SecurityConfig { }
