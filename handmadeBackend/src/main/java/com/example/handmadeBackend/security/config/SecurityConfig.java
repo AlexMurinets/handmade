@@ -9,8 +9,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
 @Component
-@CrossOrigin
 @Inherited
+@CrossOrigin
 @PropertySource("classpath:security.properties")
 @Retention(value= RetentionPolicy.RUNTIME)
 public @interface SecurityConfig { }

@@ -19,13 +19,15 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SecurityConfig
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @AllArgsConstructor
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
 
     @Value("${jwt.permit.all}")
@@ -39,6 +41,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Value("${cors.allowed.origins}")
     private final String [] allowedOrigins;
+
+    @Value("${resources.handler}")
+    private final String [] resourceHandler;
+
+    @Value("${resources.locations}")
+    private final String[] locations;
 
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
@@ -54,6 +62,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(jwtUserDetailsService).passwordEncoder(passwordEncoder());
     }
 
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler(resourceHandler)
+                .addResourceLocations(locations);
+    }
+
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
                 .allowedOrigins(allowedOrigins)
@@ -61,6 +75,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .allowedHeaders(corsHeaders)
         ;
     }
+
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {

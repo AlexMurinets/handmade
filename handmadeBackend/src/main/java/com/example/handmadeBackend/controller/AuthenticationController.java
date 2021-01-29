@@ -16,6 +16,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 
 @Log4j2
 @SecurityConfig
@@ -29,7 +31,7 @@ public class AuthenticationController {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping("/login")
-    public ResponseEntity<?> authentication(@RequestBody UserAuthenticationDto authenticationRequest) throws Exception {
+    public ResponseEntity<?> authentication(@Valid @RequestBody UserAuthenticationDto authenticationRequest) throws Exception {
 
         authenticate(authenticationRequest.getUsername(),authenticationRequest.getPassword());
         final UserDetails userDetails =

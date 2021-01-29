@@ -19,6 +19,5 @@ public class Bootstrap implements CommandLineRunner {
         user.setUsername("Test");
         user.setPassword(passwordEncoder.encode("Test"));
         userRepository.save(user);
-        System.out.println(passwordEncoder.encode("Murdol"));
     }
 }
