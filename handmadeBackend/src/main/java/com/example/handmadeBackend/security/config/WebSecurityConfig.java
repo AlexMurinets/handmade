@@ -5,6 +5,8 @@ import com.example.handmadeBackend.security.jwt.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import lombok.AllArgsConstructor;
@@ -27,7 +29,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @AllArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
-
 
     @Value("${jwt.permit.all}")
     private final String[] publicPermit;
@@ -100,6 +101,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
         return super.authenticationManagerBean();
     }
 
-
+    @Bean
+    public JavaMailSender mailSender(){
+        return new JavaMailSenderImpl();
+    }
 }
 

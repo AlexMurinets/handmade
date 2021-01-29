@@ -50,7 +50,7 @@ public class AuthenticationController {
             authenticationRequestService.createFailedRequest(authenticationRequest.getUsername(), httpServletRequest.getRemoteAddr());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        
+
         authenticationRequestService.cleanHistory(httpServletRequest.getRemoteAddr());
 
         String token = jwtTokenUtil.generateToken(userDetails);

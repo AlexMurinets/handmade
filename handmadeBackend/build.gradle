@@ -44,6 +44,11 @@ dependencies {
 	compile group: 'org.postgresql', name: 'postgresql', version: '42.2.18'
 	//</Database>
 
+
+	//<Mail>
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.4.2'
+	//</Mail>
+
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
