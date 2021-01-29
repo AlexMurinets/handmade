@@ -1,7 +1,7 @@
 package com.example.handmadeBackend.controller;
 
+import com.example.handmadeBackend.dto.UserAuthenticationDto;
 import com.example.handmadeBackend.security.config.SecurityConfig;
-import com.example.handmadeBackend.security.jwt.JwtRequest;
 import com.example.handmadeBackend.security.jwt.JwtResponse;
 import com.example.handmadeBackend.security.jwt.JwtTokenUtil;
 import com.example.handmadeBackend.security.jwt.JwtUserDetailsService;
@@ -29,7 +29,7 @@ public class AuthenticationController {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping("/login")
-    public ResponseEntity<?> authentication(@RequestBody JwtRequest authenticationRequest) throws Exception {
+    public ResponseEntity<?> authentication(@RequestBody UserAuthenticationDto authenticationRequest) throws Exception {
 
         authenticate(authenticationRequest.getUsername(),authenticationRequest.getPassword());
         final UserDetails userDetails =

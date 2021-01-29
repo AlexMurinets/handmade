@@ -1,4 +1,4 @@
-package com.example.handmadeBackend.security.jwt;
+package com.example.handmadeBackend.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +11,7 @@ import java.io.Serializable;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class JwtRequest implements Serializable {
+public class UserAuthenticationDto implements Serializable {
     private String username;
     private String password;
 }
