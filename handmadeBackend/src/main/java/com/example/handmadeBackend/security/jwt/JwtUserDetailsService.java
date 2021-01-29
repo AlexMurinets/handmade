@@ -19,8 +19,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        if (userRepository.existsByUsername(username))
-        {
+        if (userRepository.existsByUsername(username)) {
             User user = userRepository.findByUsername(username);
             return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), new ArrayList<>());
         } else {
@@ -28,7 +27,7 @@ public class JwtUserDetailsService implements UserDetailsService {
         }
     }
 
-    public User findUserByUsername(String username){
+    public User findUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
 }

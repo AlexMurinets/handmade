@@ -7,7 +7,6 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.Date;
@@ -17,7 +16,7 @@ import java.util.function.Function;
 
 @SecurityConfig
 @AllArgsConstructor
-public class JwtTokenUtil{
+public class JwtTokenUtil {
 
     @Value("${jwt.token.validation.time}")
     public static long JWT_TOKEN_VALIDITY;
@@ -25,14 +24,15 @@ public class JwtTokenUtil{
     @Value("${jwt.password.encoder.key}")
     private String secretKey;
 
-    public JwtTokenUtil() { }
+    public JwtTokenUtil() {
+    }
 
     @PostConstruct
-    public void init(){
+    public void init() {
         JWT_TOKEN_VALIDITY = JWT_TOKEN_VALIDITY * 36000;
     }
 
-    public String getUsernameFromToken(String token){
+    public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
     }
 
@@ -40,7 +40,7 @@ public class JwtTokenUtil{
         return getClaimFromToken(token, Claims::getExpiration);
     }
 
-    private  <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
+    private <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = getAllClaimsFromToken(token);
         return claimsResolver.apply(claims);
     }
@@ -61,7 +61,7 @@ public class JwtTokenUtil{
         return doGenerateToken(claims, username);
     }
 
-    public String registrationToken(String reg){
+    public String registrationToken(String reg) {
         Map<String, Object> claims = new HashMap<>();
         return doGenerateToken(claims, reg);
     }
