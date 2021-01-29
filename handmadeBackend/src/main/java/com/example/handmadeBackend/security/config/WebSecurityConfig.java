@@ -31,6 +31,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Value("${jwt.permit.all}")
     private final String[] publicPermit;
 
+    @Value("${cors.allowed.methods}")
+    private final String[] corsMethods;
+
+    @Value("${cors.allowed.headers}")
+    private final String[] corsHeaders;
+
+    @Value("${cors.allowed.origins}")
+    private final String [] allowedOrigins;
+
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     private final UserDetailsService jwtUserDetailsService;
@@ -46,10 +55,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/**").allowedOrigins("*")
-                .allowedMethods("HEAD", "GET", "PUT", "POST",
-                        "DELETE", "PATCH")
-                .allowedHeaders("*")
+        registry.addMapping("/**")
+                .allowedOrigins(allowedOrigins)
+                .allowedMethods(corsMethods)
+                .allowedHeaders(corsHeaders)
         ;
     }
 
