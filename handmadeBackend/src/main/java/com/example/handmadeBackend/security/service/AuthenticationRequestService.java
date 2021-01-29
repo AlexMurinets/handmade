@@ -46,6 +46,11 @@ public class AuthenticationRequestService {
         else
             return true;
     }
+
+    public void cleanHistory(String ip){
+        if(authenticationRequestRepository.existsByIp(ip))
+            authenticationRequestRepository.delete(authenticationRequestRepository.findByIp(ip));
+    }
     public void sendVerificationMail(){
 
     }
