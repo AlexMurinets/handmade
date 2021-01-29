@@ -19,6 +19,8 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
 
 	// <JWT>
 	compile 'io.jsonwebtoken:jjwt-api:0.11.2'
@@ -30,6 +32,15 @@ dependencies {
 	compile 'org.springframework.boot:spring-boot-starter-security'
 	compile 'org.springframework.security:spring-security-test'
 	//</Security>
+
+	//<JPA>
+	compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '2.4.3'
+	//</JPA>
+
+	//<Database>
+	//compile group: 'com.h2database', name: 'h2', version: '1.4.200'
+	compile group: 'org.postgresql', name: 'postgresql', version: '42.2.18'
+	//</Database>
 
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	compileOnly 'org.projectlombok:lombok'

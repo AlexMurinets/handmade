@@ -1,5 +1,6 @@
 package com.example.handmadeBackend.security.jwt;
 
+import com.example.handmadeBackend.security.config.SecurityConfig;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Component
+@SecurityConfig
 @AllArgsConstructor
 public class JwtRequestFilter extends OncePerRequestFilter
 {
