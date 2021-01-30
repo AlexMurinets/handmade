@@ -102,7 +102,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter implements W
     }
 
     @Bean
-    public JavaMailSender mailSender(){
+    public JavaMailSenderImpl mailSender(){
         return new JavaMailSenderImpl();
     }
 }
