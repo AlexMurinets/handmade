@@ -20,21 +20,24 @@ import java.util.Properties;
 
 @Service
 @MailConfig
-@AllArgsConstructor
 public class SystemMailService {
     @Value("${mail.transport.protocol}")
-    private final String transportProtocol;
+    private  String transportProtocol;
 
     @Value("${mail.smtp.auth}")
-    private final String smtpAuth;
+    private String smtpAuth;
 
     @Value("${mail.smtp.starttls.enable}")
-    private final String smtpStarttlsEnable;
+    private  String smtpStarttlsEnable;
 
     @Value("${mail.debug}")
-    private final String mailDebug;
+    private  String mailDebug;
 
     public JavaMailSenderImpl javaMailSender;
+
+    public SystemMailService(JavaMailSenderImpl javaMailSender) {
+        this.javaMailSender = javaMailSender;
+    }
 
     @PostConstruct
     public void init(){
