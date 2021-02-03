@@ -10,5 +10,4 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ErrorMessage {
     private String Message;
-
 }

@@ -1,6 +1,7 @@
 package com.example.handmadeBackend.exception;
 
 import com.example.handmadeBackend.exception.message.ErrorMessage;
+import com.example.handmadeBackend.exception.message.ProductException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,26 @@ public class AppExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(value = {Exception.class})
     public ResponseEntity<Object> handleAnyException(Exception ex, WebRequest request){
+        String errorMessageDescription = ex.getLocalizedMessage();
+        if (errorMessageDescription == null)
+            errorMessageDescription = ex.toString();
+        ErrorMessage errorMessage = new ErrorMessage(errorMessageDescription);
+        return new ResponseEntity<>(
+                errorMessage, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(value = {NullPointerException.class})
+    public ResponseEntity<Object> handleNullPointerException(NullPointerException ex, WebRequest request){
+        String errorMessageDescription = ex.getLocalizedMessage();
+        if (errorMessageDescription == null)
+            errorMessageDescription = ex.toString();
+        ErrorMessage errorMessage = new ErrorMessage(errorMessageDescription);
+        return new ResponseEntity<>(
+                errorMessage, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(value = {ProductException.class})
+    public ResponseEntity<Object> handleProductException(ProductException ex, WebRequest request){
         String errorMessageDescription = ex.getLocalizedMessage();
         if (errorMessageDescription == null)
             errorMessageDescription = ex.toString();

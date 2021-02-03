@@ -29,6 +29,7 @@ dependencies {
 	// </JWT>
 
 	//<Security>
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 //	compile 'org.springframework.boot:spring-boot-starter-security'
 //	compile 'org.springframework.security:spring-security-test'
 	//</Security>

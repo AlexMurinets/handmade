@@ -1,7 +1,6 @@
 package com.example.handmadeBackend.service;
 
 import com.example.handmadeBackend.dto.ProductDto;
-import com.example.handmadeBackend.model.Category;
 import com.example.handmadeBackend.model.Product;
 import com.example.handmadeBackend.repository.CategoryRepository;
 import com.example.handmadeBackend.repository.ProductRepository;
@@ -24,8 +23,8 @@ public class ProductService {
         ModelMapper modelMapper = new ModelMapper();
         modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
         Product product = modelMapper.map(productDto, Product.class);
-        product.setCategory(categoryRepository.findById(productDto.getCategory_id()).orElseThrow());
-        product.setUser(userRepository.findById(productDto.getUser_id()).orElseThrow());
+        product.setCategory(categoryRepository.findById(productDto.getCategory_id()).orElseThrow(()->new NullPointerException("Category doesn't exist.")));
+        product.setUser(userRepository.findById(productDto.getUser_id()).orElseThrow(()->new NullPointerException("User doesn't exist.")));
         productRepository.save(product);
         ProductDto returnProduct = modelMapper.map(product, ProductDto.class);
         returnProduct.setCategory_id(product.getCategory().getId());
@@ -41,6 +40,6 @@ public class ProductService {
     }
 
     public Product findById(Long id){
-        return productRepository.findById(id).orElseThrow(NullPointerException::new);
+        return productRepository.findById(id).orElseThrow(()->new NullPointerException("Product doesn't exist."));
     }
 }
