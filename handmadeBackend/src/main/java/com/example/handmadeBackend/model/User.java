@@ -1,9 +1,12 @@
 package com.example.handmadeBackend.model;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -19,4 +22,7 @@ public class User {
     private String lastName;
     private String description;
     private String password;
+    @JsonManagedReference
+    @OneToMany(mappedBy = "user")
+    private Set<Product> products = new LinkedHashSet<>();
 }
